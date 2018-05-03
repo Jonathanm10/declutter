@@ -29,3 +29,4 @@ database_name: "declutter"
 root_directory: "/vagrant/public/"
 
 php_version: "7.2"
+mysql_version: "5.7"

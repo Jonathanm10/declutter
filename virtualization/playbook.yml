@@ -30,6 +30,8 @@
       with_items:
         - php7.2-zip
         - php7.2-mbstring
+        - php7.2-mysql
+        - php7.2-xml
       notify: restart apache
 
     - name: Fix cache permission
