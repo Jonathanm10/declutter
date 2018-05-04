@@ -21,7 +21,7 @@
                 <thead>
                 <tr>
                     <th>Titre</th>
-                    <th>Prix</th>
+                    <th>Prix (CHF)</th>
                     <th>Plateforme(s)</th>
                     <th>Action</th>
                 </tr>
