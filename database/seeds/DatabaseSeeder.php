@@ -12,7 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call([
-             DummyValuesSeeder::class,
+             AdsSeeder::class,
+             PlatformsSeeder::class,
+             AdPlatformsSeeder::class,
          ]);
     }
 }
