@@ -14,3 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'AdController@index')->name('ads');
+Route::get('/create', 'AdController@create')->name('ads_create');
+Route::post('/store', 'AdController@store')->name('ads_store');
