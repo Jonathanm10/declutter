@@ -22,6 +22,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Ad extends Model
 {
+    protected $fillable = ['title', 'description', 'img_url', 'price'];
+
+    public $timestamps = false;
+
     public function platforms()
     {
         return $this->belongsToMany(Platform::class, 'ad_platforms', 'platform_id', 'ad_id');
