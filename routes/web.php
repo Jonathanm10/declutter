@@ -14,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'AdController@index')->name('ads');
-Route::get('/create', 'AdController@create')->name('ads_create');
-Route::post('/store', 'AdController@store')->name('ads_store');
+Route::get('/ads/create', 'AdController@create')->name('ads_create');
+Route::post('/ads/store', 'AdController@store')->name('ads_store');
+Route::get('/ads/{id}', 'AdController@edit')->name('ads_edit');
+Route::get('/ads/{id}/delete', 'AdController@delete')->name('ads_delete');
+Route::patch('/ads/{id}/edit', 'AdController@update')->name('ads_update');

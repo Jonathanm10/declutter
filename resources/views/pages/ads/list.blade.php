@@ -37,8 +37,8 @@
                             @endforeach
                         </td>
                         <td>
-                            <a href="#">Edit</a>
-                            <a href="#">Delete</a>
+                            <a href="{{ route('ads_edit', $ad->id) }}">Edit</a>
+                            <a href="{{ route('ads_delete', $ad->id) }}">Delete</a>
                         </td>
                     </tr>
                 @endforeach
