@@ -29,16 +29,21 @@
                 <tbody>
                 @foreach($ads as $ad)
                     <tr>
-                        <td>{{ $ad->title }}</td>
+                        <td>
+                            <a href="{{ route('ads_edit', $ad->id) }}">{{ $ad->title }}</a>
+                        </td>
                         <td>{{ $ad->price }}</td>
                         <td>
-                            @foreach ($ad->platforms as $platform)
-                                {{ $platform->type }}
+                            @foreach ($platforms as $platform)
+                                <span class="{{ in_array($platform->id, $ad->platforms->pluck('id')->toArray()) ? 'text-success' : 'text-danger' }}">
+                                    {{ $platform->type }}
+                                </span>
                             @endforeach
                         </td>
                         <td>
-                            <a href="{{ route('ads_edit', $ad->id) }}">Edit</a>
-                            <a href="{{ route('ads_delete', $ad->id) }}">Delete</a>
+                            <a href="{{ route('ads_delete', $ad->id) }}">
+                                @svg('solid/trash')
+                            </a>
                         </td>
                     </tr>
                 @endforeach

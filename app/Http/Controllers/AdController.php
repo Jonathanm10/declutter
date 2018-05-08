@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use App\Platform;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ class AdController extends Controller
     public function index()
     {
         $ads = Ad::with('platforms')->get();
-        return view('pages.ads.list', compact('ads'));
+        $platforms = Platform::all();
+        return view('pages.ads.list', compact('ads', 'platforms'));
     }
 
     public function edit($id)
@@ -42,13 +44,6 @@ class AdController extends Controller
         return redirect()->route('ads');
     }
 
-    public function delete($id)
-    {
-        $ad = Ad::find($id);
-        $ad->delete();
-        return redirect()->route('ads');
-    }
-
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -59,6 +54,13 @@ class AdController extends Controller
 
         Ad::updateOrCreate($validatedData->id, $validatedData);
 
+        return redirect()->route('ads');
+    }
+
+    public function delete($id)
+    {
+        $ad = Ad::find($id);
+        $ad->delete();
         return redirect()->route('ads');
     }
 }
