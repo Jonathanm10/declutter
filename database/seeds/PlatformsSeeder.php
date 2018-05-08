@@ -14,6 +14,7 @@ class PlatformsSeeder extends Seeder
     {
         DB::table('platforms')->insert([
             'type' => 'Testingplatform',
+            'config' => serialize(['username' => 'usernametest', 'password' => 'passwordtest']),
         ]);
     }
 }
