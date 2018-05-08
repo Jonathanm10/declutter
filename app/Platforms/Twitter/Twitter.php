@@ -14,9 +14,4 @@ class Twitter implements PlatformInterface
         $twitterFormFields = new TwitterFormFieldGenerator();
         return $twitterFormFields->getAll();
     }
-
-    public function getFormFieldsValidationRules()
-    {
-        // TODO: Implement getFormFieldsValidationRules() method.
-    }
 }
