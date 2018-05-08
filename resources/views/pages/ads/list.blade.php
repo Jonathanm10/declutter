@@ -10,7 +10,7 @@
             <h1 class="h2">Annonces</h1>
 
             <div class="btn-toolbar mb-2 mb-md-0">
-                <a href="{{ route('ads_create') }}" class="btn btn-sm btn-outline-secondary">
+                <a href="{{ route('ads.create') }}" class="btn btn-sm btn-outline-secondary">
                     @svg('solid/plus')
                     Ajouter
                 </a>
@@ -30,7 +30,7 @@
                 @foreach($ads as $ad)
                     <tr>
                         <td>
-                            <a href="{{ route('ads_edit', $ad->id) }}">{{ $ad->title }}</a>
+                            <a href="{{ route('ads.edit', $ad->id) }}">{{ $ad->title }}</a>
                         </td>
                         <td>{{ $ad->price }}</td>
                         <td>
@@ -41,7 +41,7 @@
                             @endforeach
                         </td>
                         <td>
-                            <a href="{{ route('ads_delete', $ad->id) }}">
+                            <a href="{{ route('ads.delete', $ad->id) }}">
                                 @svg('solid/trash')
                             </a>
                         </td>

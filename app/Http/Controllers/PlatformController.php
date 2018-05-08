@@ -33,7 +33,7 @@ class PlatformController extends Controller
         $platform->config = array_merge($platform->config, $validatedData);
         $platform->update();
 
-        return redirect()->route('platforms');
+        return redirect()->route('platforms.list');
     }
 
     /**

@@ -10,7 +10,7 @@
             <h1 class="h2">Editer {{ $ad->title }}</h1>
         </div>
 
-        {!! Form::model($ad, ['route'=> ['ads_update', $ad->id], 'method' => 'patch']) !!}
+        {!! Form::model($ad, ['route'=> ['ads.update', $ad->id], 'method' => 'patch']) !!}
             @include('pages.ads.form', ['submitButtonText' => 'Edit'])
         {!! Form::close() !!}
     </main>

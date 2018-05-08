@@ -20,7 +20,7 @@
             </div>
         @endif
 
-        {!! Form::open(['route'=> ['platforms_update', $platform->id], 'method' => 'patch']) !!}
+        {!! Form::open(['route'=> ['platforms.update', $platform->id], 'method' => 'patch']) !!}
             @foreach ($formFields as $formField)
                 <div class="form-group">
                     {!! Form::label($formField['id'], $formField['label']) !!}

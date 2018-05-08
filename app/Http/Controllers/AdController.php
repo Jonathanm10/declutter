@@ -41,7 +41,7 @@ class AdController extends Controller
 
         Ad::whereId($id)->update($validatedData);
 
-        return redirect()->route('ads');
+        return redirect()->route('ads.list');
     }
 
     /**
@@ -54,13 +54,13 @@ class AdController extends Controller
 
         Ad::updateOrCreate($validatedData->id, $validatedData);
 
-        return redirect()->route('ads');
+        return redirect()->route('ads.list');
     }
 
     public function delete($id)
     {
         $ad = Ad::find($id);
         $ad->delete();
-        return redirect()->route('ads');
+        return redirect()->route('ads.list');
     }
 }

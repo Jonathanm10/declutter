@@ -2,13 +2,13 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('ads') }}">
+                <a class="nav-link active" href="{{ route('ads.list') }}">
                     @svg('brands/readme')
                     Annonces <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('platforms') }}">
+                <a class="nav-link" href="{{ route('platforms.list') }}">
                     @svg('solid/cog')
                     Plateformes
                 </a>

@@ -11,17 +11,22 @@
 |
 */
 
-Route::get('/', 'AdController@index')->name('ads');
-Route::prefix('ads')->group(function () {
-    Route::get('create', 'AdController@create')->name('ads_create');
-    Route::post('store', 'AdController@store')->name('ads_store');
-    Route::get('{id}', 'AdController@edit')->name('ads_edit');
-    Route::patch('{id}/edit', 'AdController@update')->name('ads_update');
-    Route::get('{id}/delete', 'AdController@delete')->name('ads_delete');
+Route::get('/', function () {
+    return redirect()->route('ads.list');
 });
-Route::prefix('platforms')->group(function () {
-    Route::get('/', 'PlatformController@index')->name('platforms');
-    Route::get('{id}', 'PlatformController@edit')->name('platforms_edit');
-    Route::get('{id}/remove-configuration', 'PlatformController@removeConfiguration')->name('platforms_remove_config');
-    Route::patch('{id}/edit', 'PlatformController@update')->name('platforms_update');
+
+Route::group(['prefix' => 'ads', 'as' => 'ads.'], function () {
+    Route::get('/', 'AdController@index')->name('list');
+    Route::get('create', 'AdController@create')->name('create');
+    Route::post('store', 'AdController@store')->name('store');
+    Route::get('{id}', 'AdController@edit')->name('edit');
+    Route::patch('{id}/edit', 'AdController@update')->name('update');
+    Route::get('{id}/delete', 'AdController@delete')->name('delete');
+});
+
+Route::group(['prefix' => 'platforms', 'as' => 'platforms.'], function () {
+    Route::get('/', 'PlatformController@index')->name('list');
+    Route::get('{id}', 'PlatformController@edit')->name('edit');
+    Route::patch('{id}/edit', 'PlatformController@update')->name('update');
+    Route::get('{id}/remove-configuration', 'PlatformController@removeConfiguration')->name('remove_config');
 });

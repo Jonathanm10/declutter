@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{ $platform->type }}</td>
                         <td>
-                            <a href="{{ route('platforms_edit', $platform->id) }}">Configurer</a>
+                            <a href="{{ route('platforms.edit', $platform->id) }}">Configurer</a>
                         </td>
                     </tr>
                 @endforeach
