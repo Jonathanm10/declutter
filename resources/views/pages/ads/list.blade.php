@@ -34,12 +34,12 @@
                     <td>{{ $ad->price }}</td>
                     <td>
                         @foreach ($platforms as $platform)
-                            <a href="{{ route('ads.publish', ['id' => $ad->id, 'platform_id' => $platform->id]) }}">
+                            <a href="{{ route('ads.toggle_publish', ['id' => $ad->id, 'platform_id' => $platform->id]) }}">
                                 {{ $platform->type }}
                             </a>
                             <span class="{{ in_array($platform->id, $ad->platforms->pluck('id')->toArray()) ? 'text-success' : 'text-danger' }}">
                                     @svg('solid/globe')
-                                </span>
+                            </span>
                             <br/>
                         @endforeach
                     </td>
