@@ -23,13 +23,13 @@
         {!! Form::open(['route'=> ['platforms.update', $platform->id], 'method' => 'patch']) !!}
             @foreach ($formFields as $formField)
                 <div class="form-group">
-                    {!! Form::label($formField['id'], $formField['label']) !!}
+                    {!! Form::label($formField['name'], $formField['label']) !!}
                     @php
                         $form = "Form::{$formField['type']}";
                         if ($formField['type'] === 'password') {
-                            echo $form($formField['id'], ['class' => 'form-control']);
+                            echo $form($formField['name'], ['class' => 'form-control']);
                         } else {
-                            echo $form($formField['id'], $platform->config[$formField['name']], ['class' => 'form-control']);
+                            echo $form($formField['name'], $platform->config[$formField['name']], ['class' => 'form-control']);
                         }
                     @endphp
                 </div>
