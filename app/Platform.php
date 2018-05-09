@@ -10,9 +10,11 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property int $id
  * @property string $type
- * @property string $config
+ * @property string|array $config
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Platform whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Platform whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Platform whereConfig($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Platform find($value)
  */
 class Platform extends Model
 {

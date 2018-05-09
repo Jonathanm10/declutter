@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ad whereImgUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ad wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ad whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ad find($value)
  */
 class Ad extends Model
 {
