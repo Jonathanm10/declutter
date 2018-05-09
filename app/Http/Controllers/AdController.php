@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Ad;
 use App\Platform;
+use App\Platforms\Traits\GetHelperClassFromPlatform;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 
 class AdController extends Controller
 {
     use ValidatesRequests;
+    use GetHelperClassFromPlatform;
 
     protected $formRules = [
         'title' => 'required|max:255',
@@ -61,6 +63,32 @@ class AdController extends Controller
     {
         $ad = Ad::find($id);
         $ad->delete();
+        return redirect()->route('ads.list');
+    }
+
+    public function togglePublish(Request $request, $id, $platformId)
+    {
+        $platform = Platform::find($platformId);
+        $ad = Ad::find($id);
+
+        $platformHelper = $this->getHelperClassFromPlatform($platform);
+        $messageFormatter = $platformHelper->getMessageFormatterClass($ad);
+
+        $isPublished = count($ad->platforms) > 0;
+
+        try {
+            if ($isPublished) {
+                $platformHelper->unpublish($ad, $platform);
+                $ad->platforms()->detach($platformId);
+            } else {
+                $response = json_decode($platformHelper->publish($messageFormatter, $platform));
+                $ad->platforms()->attach($platformId, ['publication_item_id' => $response->id]);
+            }
+        } catch (\Exception $e) {
+            $request->session()->flash('danger', $e->getMessage());
+        }
+
+        $request->session()->flash('success', 'Annonce mise à jour');
         return redirect()->route('ads.list');
     }
 }
