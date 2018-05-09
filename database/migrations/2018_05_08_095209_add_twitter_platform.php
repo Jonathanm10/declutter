@@ -16,10 +16,10 @@ class AddTwitterPlatform extends Migration
         DB::table('platforms')->insert([
             'type' => 'Twitter',
             'config' => serialize([
-                'TWITTER_CONSUMER_KEY' => '',
-                'TWITTER_CONSUMER_SECRET' => '',
-                'TWITTER_ACCESS_TOKEN' => '',
-                'TWITTER_ACCESS_TOKEN_SECRET' => '',
+                'consumer_key' => '',
+                'consumer_secret' => '',
+                'token' => '',
+                'secret' => '',
             ]),
         ]);
     }

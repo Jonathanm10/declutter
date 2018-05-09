@@ -13,28 +13,28 @@ class TwitterFormFieldGenerator
         return [
             [
                 'label' => 'Consumer key',
-                'name' => 'TWITTER_CONSUMER_KEY',
+                'name' => 'consumer_key',
                 'type' => 'text',
                 'id' => 'consumer_key',
                 'validation' => '',
             ],
             [
                 'label' => 'Consumer secret',
-                'name' => 'TWITTER_CONSUMER_SECRET',
+                'name' => 'consumer_secret',
                 'type' => 'text',
                 'id' => 'consumer_secret',
                 'validation' => '',
             ],
             [
                 'label' => 'Access token',
-                'name' => 'TWITTER_ACCESS_TOKEN',
+                'name' => 'token',
                 'type' => 'text',
                 'id' => 'access_token',
                 'validation' => '',
             ],
             [
                 'label' => 'Access token secret',
-                'name' => 'TWITTER_ACCESS_TOKEN_SECRET',
+                'name' => 'secret',
                 'type' => 'text',
                 'id' => 'access_token_secret',
                 'validation' => '',
