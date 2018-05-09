@@ -22,6 +22,7 @@ Route::group(['prefix' => 'ads', 'as' => 'ads.'], function () {
     Route::get('{id}', 'AdController@edit')->name('edit');
     Route::patch('{id}/edit', 'AdController@update')->name('update');
     Route::get('{id}/delete', 'AdController@delete')->name('delete');
+    Route::get('{id}/toggle-publish/{platform_id}', 'AdController@togglePublish')->name('toggle_publish');
 });
 
 Route::group(['prefix' => 'platforms', 'as' => 'platforms.'], function () {
