@@ -29,9 +29,9 @@ class PlatformController extends Controller
         $helper = $this->getHelperClassFromPlatform($platform);
         $validatedData = $request->validate($helper->getFormFieldsValidationRules());
 
-        $platform = Platform::whereId($id)->first();
-        $platform->config = array_merge($platform->config, $validatedData);
-        $platform->update();
+        $updatedConfig = array_merge($platform->config, $validatedData);
+        $platform->config = $updatedConfig;
+        $platform->save();
 
         return redirect()->route('platforms.list');
     }

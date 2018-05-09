@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Platform extends Model
 {
+    protected $fillable = ['config'];
+
     public $timestamps = false;
 
     public function getConfigAttribute($value)
