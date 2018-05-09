@@ -18,7 +18,19 @@
     <div class="row">
         @include('structures.navbar')
 
-        @yield('main')
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="flash-message">
+                @foreach (['danger', 'success'] as $msg)
+                    @if(Session::has($msg))
+                        <div class="alert alert-{{ $msg }} alert-dismissible fade show" role="alert">
+                            {{ Session::get($msg) }}
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+
+            @yield('main')
+        </main>
     </div>
 </div>
 
