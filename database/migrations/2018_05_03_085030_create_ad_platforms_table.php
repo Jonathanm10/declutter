@@ -16,8 +16,10 @@ class CreateAdPlatformsTable extends Migration
         Schema::create('ad_platforms', function (Blueprint $table) {
             $table->unsignedInteger('ad_id');
             $table->unsignedInteger('platform_id');
+            $table->string('publication_item_id');
             $table->foreign('ad_id')->references('id')->on('ads');
             $table->foreign('platform_id')->references('id')->on('platforms');
+            $table->unique(['ad_id', 'platform_id']);
         });
     }
 
