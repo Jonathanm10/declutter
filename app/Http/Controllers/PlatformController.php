@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Platform;
-use App\Platforms\PlatformInterface;
+use App\Platforms\Traits\GetHelperClassFromPlatform;
 use Illuminate\Http\Request;
 
 class PlatformController extends Controller
 {
+    use GetHelperClassFromPlatform;
+
     public function index()
     {
         $platforms = Platform::all();
@@ -34,17 +36,5 @@ class PlatformController extends Controller
         $platform->save();
 
         return redirect()->route('platforms.list');
-    }
-
-    /**
-     * @param Platform $platform
-     * @return PlatformInterface
-     */
-    protected function getHelperClassFromPlatform(Platform $platform)
-    {
-        $platformType = $platform->type;
-        $class = "App\Platforms\\$platformType\\$platformType";
-
-        return new $class();
     }
 }

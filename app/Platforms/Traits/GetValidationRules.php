@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Platforms;
+namespace App\Platforms\Traits;
 
 
 trait GetValidationRules
