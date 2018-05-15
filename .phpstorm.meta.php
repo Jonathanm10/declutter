@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-05-09 08:50:08.
+    * Generated on 2018-05-15 13:00:59.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -145,6 +145,7 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'goutte' => \Goutte\Client::class,
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
@@ -283,6 +284,7 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'goutte' => \Goutte\Client::class,
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
@@ -421,6 +423,7 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'goutte' => \Goutte\Client::class,
     ]));
     override(\App::make(0), map([
         '' => '@',
@@ -559,6 +562,7 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'goutte' => \Goutte\Client::class,
     ]));
     override(\App::makeWith(0), map([
         '' => '@',
@@ -697,6 +701,7 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'goutte' => \Goutte\Client::class,
     ]));
     override(\app(0), map([
         '' => '@',
@@ -835,6 +840,7 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'goutte' => \Goutte\Client::class,
     ]));
     override(\resolve(0), map([
         '' => '@',
@@ -973,6 +979,7 @@ namespace PHPSTORM_META {
         'form' => \Collective\Html\FormBuilder::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'goutte' => \Goutte\Client::class,
     ]));
 
     override(\Illuminate\Support\Arr::add(0), type(0));
