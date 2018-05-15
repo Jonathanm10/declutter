@@ -152,6 +152,7 @@ return [
          */
         Collective\Html\HtmlServiceProvider::class,
         Thujohn\Twitter\TwitterServiceProvider::class,
+        Weidner\Goutte\GoutteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -213,6 +214,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
+        'Goutte' => Weidner\Goutte\GoutteFacade::class,
 
     ],
 
