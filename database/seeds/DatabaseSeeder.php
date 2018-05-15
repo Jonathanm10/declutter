@@ -14,7 +14,6 @@ class DatabaseSeeder extends Seeder
          $this->call([
              AdsSeeder::class,
              PlatformsSeeder::class,
-             AdPlatformsSeeder::class,
          ]);
     }
 }

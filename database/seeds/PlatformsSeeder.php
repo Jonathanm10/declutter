@@ -13,8 +13,18 @@ class PlatformsSeeder extends Seeder
     public function run()
     {
         DB::table('platforms')->insert([
-            'type' => 'Testingplatform',
-            'config' => serialize(['username' => 'usernametest', 'password' => 'passwordtest']),
+            'type' => 'Twitter',
+            'config' => serialize([
+                'consumer_key' => '',
+                'consumer_secret' => '',
+                'token' => '',
+                'secret' => '',
+            ]),
+        ]);
+
+        DB::table('platforms')->insert([
+            'type' => 'Petitesannonces',
+            'config' => serialize(['username' => '', 'password' => '']),
         ]);
     }
 }
