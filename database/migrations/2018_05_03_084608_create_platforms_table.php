@@ -15,7 +15,7 @@ class CreatePlatformsTable extends Migration
     {
         Schema::create('platforms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
+            $table->string('type')->unique();
             $table->text('config');
         });
     }
