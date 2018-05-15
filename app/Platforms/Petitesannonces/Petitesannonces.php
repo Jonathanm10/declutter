@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Platforms\Testingplatform;
+namespace App\Platforms\Petitesannonces;
 
 
 use App\Ad;
 use App\Platform;
-use App\Platforms\Traits\GetValidationRules;
 use App\Platforms\MessageFormatterInterface;
 use App\Platforms\PlatformInterface;
+use App\Platforms\Traits\GetValidationRules;
 
-class Testingplatform implements PlatformInterface
+class Petitesannonces implements PlatformInterface
 {
     use GetValidationRules;
 
-    public function getFormFields()
+    public function getFormFields() : array
     {
-        $formFieldsGenerator = new TestingplatformFormFieldGenerator();
-        return $formFieldsGenerator->getAll();
+        $petitesannoncesFormField = new PetitesannoncesFormFieldGenerator();
+        return $petitesannoncesFormField->getAll();
     }
 
     public function publish(MessageFormatterInterface $message, Platform $platform)
@@ -24,19 +24,9 @@ class Testingplatform implements PlatformInterface
         // TODO: Implement publish() method.
     }
 
-    public function getFormattedMessage()
-    {
-        // TODO: Implement getFormattedMessage() method.
-    }
-
     public function unpublish(Ad $ad, Platform $platform)
     {
         // TODO: Implement unpublish() method.
-    }
-
-    public function getFormFieldsValidationRules()
-    {
-        // TODO: Implement getFormFieldsValidationRules() method.
     }
 
     public function getMessageFormatterClass(Ad $ad)

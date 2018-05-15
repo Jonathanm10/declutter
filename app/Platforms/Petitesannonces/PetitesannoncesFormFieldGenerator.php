@@ -1,11 +1,13 @@
 <?php
 
+namespace App\Platforms\Petitesannonces;
 
-namespace App\Platforms\Testingplatform;
 
-
-class TestingplatformFormFieldGenerator
+class PetitesannoncesFormFieldGenerator
 {
+    /**
+     * @return array
+     */
     public function getAll()
     {
         return [
@@ -14,14 +16,14 @@ class TestingplatformFormFieldGenerator
                 'name' => 'username',
                 'type' => 'text',
                 'id' => 'username',
-                'validation' => ''
+                'validation' => '',
             ],
             [
                 'label' => 'Password',
                 'name' => 'password',
                 'type' => 'password',
                 'id' => 'password',
-                'validation' => ''
+                'validation' => '',
             ],
         ];
     }
