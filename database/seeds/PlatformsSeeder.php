@@ -24,7 +24,7 @@ class PlatformsSeeder extends Seeder
 
         DB::table('platforms')->insert([
             'type' => 'Petitesannonces',
-            'config' => serialize(['username' => '', 'password' => '']),
+            'config' => serialize(['email' => '', 'password' => '']),
         ]);
     }
 }
