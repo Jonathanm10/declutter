@@ -4,12 +4,14 @@ namespace App\Platforms\Twitter;
 
 use App\Ad;
 use App\Platform;
+use App\Platforms\Traits\GetMimeTypeValidation;
 use App\Platforms\Traits\GetValidationRules;
 use App\Platforms\PlatformInterface;
 
 class Twitter implements PlatformInterface
 {
     use GetValidationRules;
+    use GetMimeTypeValidation;
 
     public function authenticate(Platform $platform): \Thujohn\Twitter\Twitter
     {
@@ -31,7 +33,16 @@ class Twitter implements PlatformInterface
     public function publish(Ad $ad, Platform $platform): int
     {
         $twitter = $this->authenticate($platform);
-        $response = json_decode($twitter->postTweet(['status' => $ad->formattedString, 'format' => 'json']));
+
+        $this->imageUrlValidation($ad->img_url);
+
+        $file = file_get_contents($ad->img_url);
+        $uploadedMedia = $twitter->uploadMedia(['media' => $file]);
+
+        $response = $twitter->postTweet(
+            ['status' => $ad->formattedString, 'media_ids' => $uploadedMedia->media_id_string]
+        );
+
         return $response->id;
     }
 

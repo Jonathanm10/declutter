@@ -6,8 +6,10 @@ namespace App\Platforms\Petitesannonces;
 use App\Ad;
 use App\Platform;
 use App\Platforms\PlatformInterface;
+use App\Platforms\Traits\GetMimeTypeValidation;
 use App\Platforms\Traits\GetValidationRules;
 use Goutte;
+use Illuminate\Support\Facades\Storage;
 use League\Uri\Components\Query;
 use League\Uri\Parser;
 use Symfony\Component\DomCrawler\Crawler;
@@ -15,6 +17,7 @@ use Symfony\Component\DomCrawler\Crawler;
 class Petitesannonces implements PlatformInterface
 {
     use GetValidationRules;
+    use GetMimeTypeValidation;
 
     const BASE_URL = 'https://www.petitesannonces.ch/my';
     const AD_URL = self::BASE_URL . '/annonce';
@@ -67,7 +70,21 @@ class Petitesannonces implements PlatformInterface
             throw new \Exception(implode(', ', $errors));
         }
 
+        $this->imageUrlValidation($ad->img_url);
+
+        $file = file_get_contents($ad->img_url);
+        $name = substr($ad->img_url, strrpos($ad->img_url, '/') + 1);
+        Storage::put($name, $file);
+
+
         // Add image
+        $form = $crawler->filter('#imageuploader')->first()->form();
+        $form['picture'] = Storage::path($name);
+        $crawler = Goutte::submit($form);
+
+        Storage::delete($name);
+
+        // Accept added image(s)
         $form = $crawler->selectButton('Continuer >')->form();
         $crawler = Goutte::submit($form, $form->getValues());
 
