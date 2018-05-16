@@ -62,6 +62,12 @@ class AdController extends Controller
     public function delete($id)
     {
         $ad = Ad::find($id);
+
+        $ad->platforms()->where('ad_id', $id)->get()->each(function($platform) use ($ad) {
+            $platformHelper = $this->getHelperClassFromPlatform($platform);
+            $platformHelper->unpublish($ad, $platform);
+        });
+
         $ad->delete();
         return redirect()->route('ads.list');
     }
