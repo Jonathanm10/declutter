@@ -54,7 +54,7 @@ class AdController extends Controller
     {
         $validatedData = $request->validate($this->formRules);
 
-        Ad::updateOrCreate($validatedData->id, $validatedData);
+        Ad::create($validatedData);
 
         return redirect()->route('ads.list');
     }
