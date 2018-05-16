@@ -70,18 +70,18 @@ class Petitesannonces implements PlatformInterface
             throw new \Exception(implode(', ', $errors));
         }
 
+        // Get image from url
         $this->imageUrlValidation($ad->img_url);
-
         $file = file_get_contents($ad->img_url);
         $name = substr($ad->img_url, strrpos($ad->img_url, '/') + 1);
         Storage::put($name, $file);
-
 
         // Add image
         $form = $crawler->filter('#imageuploader')->first()->form();
         $form['picture'] = Storage::path($name);
         $crawler = Goutte::submit($form);
 
+        // Remove it since we don't need it anymore
         Storage::delete($name);
 
         // Accept added image(s)
