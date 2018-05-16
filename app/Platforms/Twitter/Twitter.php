@@ -22,6 +22,12 @@ class Twitter implements PlatformInterface
         return $twitterFormFields->getAll();
     }
 
+    /**
+     * @param Ad $ad
+     * @param Platform $platform
+     * @return int
+     * @throws \Exception
+     */
     public function publish(Ad $ad, Platform $platform): int
     {
         $twitter = $this->authenticate($platform);

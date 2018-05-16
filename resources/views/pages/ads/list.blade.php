@@ -9,7 +9,7 @@
         <h1 class="h2">Annonces</h1>
 
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="{{ route('ads.create') }}" class="btn btn-sm btn-outline-secondary">
+            <a href="{{ route('ads.create') }}" class="btn btn-sm btn-outline-primary">
                 @svg('solid/plus')
                 Ajouter
             </a>
@@ -47,7 +47,7 @@
                     </td>
                     <td>
                         <a href="{{ route('ads.delete', $ad->id) }}" class="ad-delete"
-                           data-is-published="{{ count($ad->platforms->pluck('id')->toArray()) > 0 ? true : false }}">
+                           data-is-published="{{ count($ad->platforms->pluck('id')->toArray()) > 0 }}">
                             @svg('solid/trash')
                         </a>
                     </td>
