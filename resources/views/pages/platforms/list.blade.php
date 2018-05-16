@@ -19,9 +19,16 @@
             <tbody>
             @foreach($platforms as $platform)
                 <tr>
-                    <td>{{ $platform->type }}</td>
                     <td>
-                        <a href="{{ route('platforms.edit', $platform->id) }}">Configurer</a>
+                        <a href="{{ route('platforms.edit', $platform->id) }}">
+                            {{ $platform->type }}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="platform-remove-conf" href="{{ route('platforms.remove_config', $platform->id) }}"
+                           data-has-ads="{{ count($platform->ads) > 0 }}">
+                            Remove configuration
+                        </a>
                     </td>
                 </tr>
             @endforeach
@@ -29,3 +36,26 @@
         </table>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const platformDeleteLinks = document.querySelectorAll('.platform-remove-conf');
+        if (platformDeleteLinks.length > 0) {
+          platformDeleteLinks.forEach(function (platform) {
+            platform.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (e.currentTarget.getAttribute('data-has-ads') === '1') {
+                if (confirm("La plateforme contient des annonces. Ceci dépubliera toutes celles-ci. Êtes-vous sûr ?")) {
+                  window.location = e.currentTarget.href;
+                } else {
+                  return;
+                }
+              }
+              window.location = e.currentTarget.href;
+            });
+          });
+        }
+      });
+    </script>
+@endpush
