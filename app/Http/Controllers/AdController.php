@@ -72,8 +72,6 @@ class AdController extends Controller
         $ad = Ad::find($id);
 
         $platformHelper = $this->getHelperClassFromPlatform($platform);
-        $messageFormatter = $platformHelper->getMessageFormatterClass($ad);
-
         $isPublished = count($ad->platforms) > 0;
 
         try {

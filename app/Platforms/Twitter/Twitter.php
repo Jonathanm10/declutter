@@ -5,31 +5,28 @@ namespace App\Platforms\Twitter;
 use App\Ad;
 use App\Platform;
 use App\Platforms\Traits\GetValidationRules;
-use App\Platforms\MessageFormatterInterface;
 use App\Platforms\PlatformInterface;
 
 class Twitter implements PlatformInterface
 {
     use GetValidationRules;
 
-    public function authenticate(Platform $platform) : \Thujohn\Twitter\Twitter
+    public function authenticate(Platform $platform): \Thujohn\Twitter\Twitter
     {
         return \Thujohn\Twitter\Facades\Twitter::reconfig($platform->config);
     }
 
-    public function getFormFields() : array
+    public function getFormFields(): array
     {
         $twitterFormFields = new TwitterFormFieldGenerator();
         return $twitterFormFields->getAll();
     }
 
-    public function publish(MessageFormatterInterface $message, Platform $platform)
+    public function publish(Ad $ad, Platform $platform): int
     {
         $twitter = $this->authenticate($platform);
-
-        return $twitter->postTweet(
-            ['status' => $message->getFormattedMessage(), 'format' => 'json']
-        );
+        $response = json_decode($twitter->postTweet(['status' => $ad->formattedString, 'format' => 'json']));
+        return $response->id;
     }
 
     public function unpublish(Ad $ad, Platform $platform)
@@ -39,10 +36,5 @@ class Twitter implements PlatformInterface
         $tweetId = $ad->platforms()->where('platform_id', $platform->id)->first()->pivot->publication_item_id;
 
         return $twitter->destroyTweet($tweetId);
-    }
-
-    public function getMessageFormatterClass(Ad $ad)
-    {
-        return new TwitterMessageFormatter($ad);
     }
 }
