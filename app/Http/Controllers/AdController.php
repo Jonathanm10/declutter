@@ -20,6 +20,9 @@ class AdController extends Controller
         'price' => 'required|numeric',
     ];
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $ads = Ad::with('platforms')->get();
@@ -27,16 +30,28 @@ class AdController extends Controller
         return view('pages.ads.list', compact('ads', 'platforms'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         return view('pages.ads.edit', ['ad' => Ad::findOrFail($id)]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('pages.ads.create');
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate($this->formRules);
@@ -59,6 +74,10 @@ class AdController extends Controller
         return redirect()->route('ads.list');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete($id)
     {
         $ad = Ad::find($id);
@@ -72,13 +91,19 @@ class AdController extends Controller
         return redirect()->route('ads.list');
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @param $platformId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function togglePublish(Request $request, $id, $platformId)
     {
         $platform = Platform::find($platformId);
         $ad = Ad::find($id);
 
         $platformHelper = $this->getHelperClassFromPlatform($platform);
-        $isPublished = count($ad->platforms) > 0;
+        $isPublished = $ad->platforms()->where('platform_id', $platformId)->first() !== null;
 
         try {
             if ($isPublished) {
