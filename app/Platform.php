@@ -22,6 +22,11 @@ class Platform extends Model
 
     public $timestamps = false;
 
+    public function ads()
+    {
+        return $this->belongsToMany(Ad::class, 'ad_platforms')->withPivot('publication_item_id');
+    }
+
     public function getConfigAttribute($value)
     {
         return unserialize($value);
