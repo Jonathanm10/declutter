@@ -34,17 +34,20 @@
                     <td>{{ $ad->price }}</td>
                     <td>
                         @foreach ($platforms as $platform)
+                            @php ($isPublished = in_array($platform->id, $ad->platforms->pluck('id')->toArray()))
+
                             <a href="{{ route('ads.toggle_publish', ['id' => $ad->id, 'platform_id' => $platform->id]) }}">
                                 {{ $platform->type }}
                             </a>
-                            <span class="{{ in_array($platform->id, $ad->platforms->pluck('id')->toArray()) ? 'text-success' : 'text-danger' }}">
+                            <span class="{{ $isPublished ? 'text-success' : 'text-danger' }}">
                                     @svg('solid/globe')
                             </span>
                             <br/>
                         @endforeach
                     </td>
                     <td>
-                        <a href="{{ route('ads.delete', $ad->id) }}">
+                        <a href="{{ route('ads.delete', $ad->id) }}" class="ad-delete"
+                           data-is-published="{{ count($ad->platforms->pluck('id')->toArray()) > 0 ? true : false }}">
                             @svg('solid/trash')
                         </a>
                     </td>
@@ -54,3 +57,21 @@
         </table>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const adDeleteLink = document.querySelector('.ad-delete');
+        if (adDeleteLink) {
+          adDeleteLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (e.currentTarget.getAttribute('data-is-published') === '1'
+              && confirm("Les annonces publiées seront automatiquement dépubliées, êtes-vous sûr ?")
+            ){
+              window.location = e.currentTarget.href;
+            }
+          });
+        }
+      });
+    </script>
+@endpush
