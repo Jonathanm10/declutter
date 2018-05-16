@@ -12,10 +12,10 @@ class PetitesannoncesFormFieldGenerator
     {
         return [
             [
-                'label' => 'User name',
-                'name' => 'username',
+                'label' => 'Email',
+                'name' => 'email',
                 'type' => 'text',
-                'id' => 'username',
+                'id' => 'email',
                 'validation' => '',
             ],
             [

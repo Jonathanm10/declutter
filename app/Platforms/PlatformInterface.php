@@ -8,7 +8,8 @@ use App\Platform;
 
 interface PlatformInterface
 {
-    public function getFormFields();
+    public function authenticate(Platform $platform);
+    public function getFormFields() : array;
     public function getFormFieldsValidationRules();
     public function publish(Ad $ad, Platform $platform) : int;
     public function unpublish(Ad $ad, Platform $platform);

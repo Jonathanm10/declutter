@@ -79,14 +79,14 @@ class AdController extends Controller
                 $platformHelper->unpublish($ad, $platform);
                 $ad->platforms()->detach($platformId);
             } else {
-                $response = json_decode($platformHelper->publish($messageFormatter, $platform));
-                $ad->platforms()->attach($platformId, ['publication_item_id' => $response->id]);
+                $publicationItemId = $platformHelper->publish($ad, $platform);
+                $ad->platforms()->attach($platformId, ['publication_item_id' => $publicationItemId]);
             }
+            $request->session()->flash('success', 'Annonce mise à jour');
         } catch (\Exception $e) {
             $request->session()->flash('danger', $e->getMessage());
         }
 
-        $request->session()->flash('success', 'Annonce mise à jour');
         return redirect()->route('ads.list');
     }
 }

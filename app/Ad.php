@@ -24,11 +24,21 @@ use Illuminate\Database\Eloquent\Model;
 class Ad extends Model
 {
     protected $fillable = ['title', 'description', 'img_url', 'price'];
+    // Hide those attributes when calling a ->toArray() on the object
+    protected $hidden = ['id', 'img_url', 'platforms'];
 
     public $timestamps = false;
 
     public function platforms()
     {
         return $this->belongsToMany(Platform::class, 'ad_platforms')->withPivot('publication_item_id');
+    }
+
+    public function getFormattedStringAttribute()
+    {
+        return sprintf(
+            "%s\n%s\nPrix : %d CHF",
+            $this->title, $this->description, $this->price
+        );
     }
 }
