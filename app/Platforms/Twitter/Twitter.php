@@ -4,14 +4,17 @@ namespace App\Platforms\Twitter;
 
 use App\Ad;
 use App\Platform;
-use App\Platforms\Traits\GetMimeTypeValidation;
+use App\Platforms\Traits\GetImageValidation;
 use App\Platforms\Traits\GetValidationRules;
 use App\Platforms\PlatformInterface;
+use Illuminate\Support\Facades\Storage;
 
 class Twitter implements PlatformInterface
 {
     use GetValidationRules;
-    use GetMimeTypeValidation;
+    use GetImageValidation;
+
+    const MAX_IMAGE_UPLOAD_SIZE = 5242880;
 
     public function authenticate(Platform $platform): \Thujohn\Twitter\Twitter
     {
@@ -37,6 +40,11 @@ class Twitter implements PlatformInterface
         $this->imageUrlValidation($ad->img_url);
 
         $file = file_get_contents($ad->img_url);
+        $name = substr($ad->img_url, strrpos($ad->img_url, '/') + 1);
+        Storage::put($name, $file);
+        $this->imageSizeValidation($name);
+        Storage::delete($name);
+
         $uploadedMedia = $twitter->uploadMedia(['media' => $file]);
 
         $response = $twitter->postTweet(

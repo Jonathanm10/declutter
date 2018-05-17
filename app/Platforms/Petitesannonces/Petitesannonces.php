@@ -6,7 +6,7 @@ namespace App\Platforms\Petitesannonces;
 use App\Ad;
 use App\Platform;
 use App\Platforms\PlatformInterface;
-use App\Platforms\Traits\GetMimeTypeValidation;
+use App\Platforms\Traits\GetImageValidation;
 use App\Platforms\Traits\GetValidationRules;
 use Goutte;
 use Illuminate\Support\Facades\Crypt;
@@ -18,7 +18,9 @@ use Symfony\Component\DomCrawler\Crawler;
 class Petitesannonces implements PlatformInterface
 {
     use GetValidationRules;
-    use GetMimeTypeValidation;
+    use GetImageValidation;
+
+    const MAX_IMAGE_UPLOAD_SIZE = 8388608;
 
     const BASE_URL = 'https://www.petitesannonces.ch/my';
     const AD_URL = self::BASE_URL . '/annonce';
@@ -79,6 +81,7 @@ class Petitesannonces implements PlatformInterface
         $file = file_get_contents($ad->img_url);
         $name = substr($ad->img_url, strrpos($ad->img_url, '/') + 1);
         Storage::put($name, $file);
+        $this->imageSizeValidation($name);
 
         // Add image
         $form = $crawler->filter('#imageuploader')->first()->form();
@@ -116,7 +119,7 @@ class Petitesannonces implements PlatformInterface
         Goutte::submit($form);
     }
 
-    protected function getPublicationItemIdFromUrl($url)
+    public function getPublicationItemIdFromUrl($url)
     {
         $parser = new Parser();
         $queryString = $parser($url)['query'];
