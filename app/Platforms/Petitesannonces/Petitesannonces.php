@@ -28,6 +28,9 @@ class Petitesannonces implements PlatformInterface
     const DELETE_AD_URL = self::AD_URL . '/suppression/?cids[]=';
     const CATEGORY_URL = self::AD_URL . '/insertion/?tid=23&step=form';
 
+    /**
+     * @param Platform $platform
+     */
     public function authenticate(Platform $platform)
     {
         $config = $platform->config;
@@ -41,6 +44,9 @@ class Petitesannonces implements PlatformInterface
         Goutte::submit($form, $config);
     }
 
+    /**
+     * @return array
+     */
     public function getFormFields(): array
     {
         $petitesannoncesFormField = new PetitesannoncesFormFieldGenerator();
@@ -106,6 +112,10 @@ class Petitesannonces implements PlatformInterface
         return $this->getPublicationItemIdFromUrl($crawler->getUri());
     }
 
+    /**
+     * @param Ad $ad
+     * @param Platform $platform
+     */
     public function unpublish(Ad $ad, Platform $platform)
     {
         $this->authenticate($platform);
@@ -119,6 +129,10 @@ class Petitesannonces implements PlatformInterface
         Goutte::submit($form);
     }
 
+    /**
+     * @param $url
+     * @return mixed
+     */
     public function getPublicationItemIdFromUrl($url)
     {
         $parser = new Parser();

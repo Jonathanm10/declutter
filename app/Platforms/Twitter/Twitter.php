@@ -14,13 +14,23 @@ class Twitter implements PlatformInterface
     use GetValidationRules;
     use ImageHelper;
 
+    /**
+     * @url https://developer.twitter.com/en/docs/media/upload-media/overview
+     */
     const MAX_IMAGE_UPLOAD_SIZE = 5242880;
 
+    /**
+     * @param Platform $platform
+     * @return \Thujohn\Twitter\Twitter
+     */
     public function authenticate(Platform $platform): \Thujohn\Twitter\Twitter
     {
         return \Thujohn\Twitter\Facades\Twitter::reconfig($platform->config);
     }
 
+    /**
+     * @return array
+     */
     public function getFormFields(): array
     {
         $twitterFormFields = new TwitterFormFieldGenerator();
@@ -54,6 +64,11 @@ class Twitter implements PlatformInterface
         return $response->id;
     }
 
+    /**
+     * @param Ad $ad
+     * @param Platform $platform
+     * @return mixed
+     */
     public function unpublish(Ad $ad, Platform $platform)
     {
         $twitter = $this->authenticate($platform);

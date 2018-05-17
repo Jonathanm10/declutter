@@ -6,6 +6,13 @@ namespace App\Platforms\Traits;
 use finfo;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Trait ImageHelper
+ *
+ * Share the methods related to image between the two platforms
+ *
+ * @package App\Platforms\Traits
+ */
 trait ImageHelper
 {
     /**
@@ -56,6 +63,10 @@ trait ImageHelper
         }
     }
 
+    /**
+     * @param $imageUrl
+     * @return string
+     */
     protected function getUniqueNameFromUrl($imageUrl)
     {
         return uniqid() . '_' . substr($imageUrl, strrpos($imageUrl, '/') + 1);
