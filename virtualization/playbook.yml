@@ -24,7 +24,7 @@
     - { role: apache }         # Apache for basic HTML website
 
   tasks:
-    - name: ensure php7.2 packages needed for Laravel are installed
+    - name: Ensure php7.2 packages needed for Laravel are installed
       apt: pkg={{ item }} state=present
       sudo: yes
       with_items:
@@ -51,6 +51,10 @@
     - name: Install Laravel packages via composer
       shell: cd {{ root_directory }}../ && composer --quiet install
 
+    - name: Ensure chromedriver is installed
+      apt: pkg=chromedriver state=present
+      sudo: yes
+
     - name: Set artisan command executable
       file: dest={{ root_directory }}../artisan mode=a+wrx
 
@@ -59,3 +63,6 @@
 
     - name: Create Laravel application key
       shell: "{{ root_directory }}../artisan key:generate"
+
+    - name: Create Laravel application key
+      shell: "{{ root_directory }}../artisan migrate --seed"
