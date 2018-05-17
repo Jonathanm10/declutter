@@ -6,6 +6,7 @@ use App\Ad;
 use App\Platform;
 use App\Platforms\Traits\GetHelperClassFromPlatform;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class PlatformController extends Controller
 {
@@ -31,6 +32,10 @@ class PlatformController extends Controller
         $platform = Platform::find($id);
         $helper = $this->getHelperClassFromPlatform($platform);
         $validatedData = $request->validate($helper->getFormFieldsValidationRules());
+
+        if (array_key_exists('password', $validatedData)) {
+            $validatedData['password'] = Crypt::encrypt($validatedData['password']);
+        }
 
         $updatedConfig = array_merge($platform->config, $validatedData);
         $platform->config = $updatedConfig;

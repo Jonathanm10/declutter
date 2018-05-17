@@ -9,6 +9,7 @@ use App\Platforms\PlatformInterface;
 use App\Platforms\Traits\GetMimeTypeValidation;
 use App\Platforms\Traits\GetValidationRules;
 use Goutte;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use League\Uri\Components\Query;
 use League\Uri\Parser;
@@ -28,6 +29,9 @@ class Petitesannonces implements PlatformInterface
     public function authenticate(Platform $platform)
     {
         $config = $platform->config;
+
+        $config['password'] = Crypt::decrypt($config['password']);
+
         /* @var $crawler Crawler */
         $crawler = Goutte::request('GET', self::LOGIN_URL);
         /* @var $form \Form */
