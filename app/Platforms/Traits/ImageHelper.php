@@ -6,7 +6,7 @@ namespace App\Platforms\Traits;
 use finfo;
 use Illuminate\Support\Facades\Storage;
 
-trait GetImageValidation
+trait ImageHelper
 {
     /**
      * Since Twitter & Petitesannonces share the same supported mime types, we can leave it here
@@ -54,5 +54,10 @@ trait GetImageValidation
                 )
             );
         }
+    }
+
+    protected function getUniqueNameFromUrl($imageUrl)
+    {
+        return uniqid() . '_' . substr($imageUrl, strrpos($imageUrl, '/') + 1);
     }
 }

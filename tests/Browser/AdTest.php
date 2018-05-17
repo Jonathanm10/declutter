@@ -8,12 +8,20 @@ use Laravel\Dusk\Browser;
 
 class AdTest extends DuskTestCase
 {
-    protected $testingValues = [
-        'title' => 'Testing title',
-        'description' => 'Testing description',
-        'img_url' => 'https://www.testingurl.com/testingimage.jpg',
-        'price' => 35.45,
-    ];
+    protected $uniqueId;
+    protected $testingValues;
+
+    public function __construct(?string $name = null, array $data = [], string $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->uniqueId = uniqid();
+        $this->testingValues = [
+            'title' => 'Testing title ' . $this->uniqueId,
+            'description' => 'Testing description',
+            'img_url' => 'https://www.testingurl.com/testingimage.jpg',
+            'price' => 35.45,
+        ];
+    }
 
     /**
      * @return void
@@ -24,15 +32,15 @@ class AdTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/ads')
                 ->clickLink('Ajouter')
-                ->type('title', 'Testing title ' . uniqid())
+                ->type('title', 'Testing title ' . $this->uniqueId)
                 ->type('description', 'Testing description')
                 ->type('img_url', 'https://www.testingurl.com')
                 ->type('price', 35.45)
                 ->press('Create')
-                ->assertSee('Testing title');
+                ->assertSee('Testing title ' . $this->uniqueId);
         });
 
-        if ($ad = Ad::whereTitle('Testing title')->first()) {
+        if ($ad = Ad::whereTitle('Testing title ' . $this->uniqueId)->first()) {
             $ad->delete();
         }
     }
@@ -52,7 +60,7 @@ class AdTest extends DuskTestCase
                 ->assertSee('343.34');
         });
 
-        if ($ad = Ad::whereTitle('Testing title')->first()) {
+        if ($ad = Ad::whereTitle('Testing title ' . $this->uniqueId)->first()) {
             $ad->delete();
         }
     }
@@ -72,7 +80,7 @@ class AdTest extends DuskTestCase
                 ->assertSee('Le champ price doit contenir un nombre');
         });
 
-        if ($ad = Ad::whereTitle('Testing title')->first()) {
+        if ($ad = Ad::whereTitle('Testing title ' . $this->uniqueId)->first()) {
             $ad->delete();
         }
     }
@@ -87,10 +95,10 @@ class AdTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($ad) {
             $browser->visit('/ads/' . $ad->id . '/delete')
-                ->assertDontSee('Testing title');
+                ->assertDontSee('Testing title ' . $this->uniqueId);
         });
 
-        if ($ad = Ad::whereTitle('Testing title')->first()) {
+        if ($ad = Ad::whereTitle('Testing title ' . $this->uniqueId)->first()) {
             $ad->delete();
         }
     }

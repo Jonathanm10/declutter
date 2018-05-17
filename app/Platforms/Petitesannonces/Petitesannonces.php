@@ -6,7 +6,7 @@ namespace App\Platforms\Petitesannonces;
 use App\Ad;
 use App\Platform;
 use App\Platforms\PlatformInterface;
-use App\Platforms\Traits\GetImageValidation;
+use App\Platforms\Traits\ImageHelper;
 use App\Platforms\Traits\GetValidationRules;
 use Goutte;
 use Illuminate\Support\Facades\Crypt;
@@ -18,7 +18,7 @@ use Symfony\Component\DomCrawler\Crawler;
 class Petitesannonces implements PlatformInterface
 {
     use GetValidationRules;
-    use GetImageValidation;
+    use ImageHelper;
 
     const MAX_IMAGE_UPLOAD_SIZE = 8388608;
 
@@ -79,7 +79,7 @@ class Petitesannonces implements PlatformInterface
         // Get image from url
         $this->imageUrlValidation($ad->img_url);
         $file = file_get_contents($ad->img_url);
-        $name = substr($ad->img_url, strrpos($ad->img_url, '/') + 1);
+        $name = $this->getUniqueNameFromUrl($ad->img_url);
         Storage::put($name, $file);
         $this->imageSizeValidation($name);
 

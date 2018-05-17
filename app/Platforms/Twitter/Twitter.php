@@ -4,7 +4,7 @@ namespace App\Platforms\Twitter;
 
 use App\Ad;
 use App\Platform;
-use App\Platforms\Traits\GetImageValidation;
+use App\Platforms\Traits\ImageHelper;
 use App\Platforms\Traits\GetValidationRules;
 use App\Platforms\PlatformInterface;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class Twitter implements PlatformInterface
 {
     use GetValidationRules;
-    use GetImageValidation;
+    use ImageHelper;
 
     const MAX_IMAGE_UPLOAD_SIZE = 5242880;
 
@@ -40,7 +40,7 @@ class Twitter implements PlatformInterface
         $this->imageUrlValidation($ad->img_url);
 
         $file = file_get_contents($ad->img_url);
-        $name = substr($ad->img_url, strrpos($ad->img_url, '/') + 1);
+        $name = $this->getUniqueNameFromUrl($ad->img_url);
         Storage::put($name, $file);
         $this->imageSizeValidation($name);
         Storage::delete($name);
