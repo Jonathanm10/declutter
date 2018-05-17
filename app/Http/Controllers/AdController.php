@@ -75,19 +75,31 @@ class AdController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
         $ad = Ad::find($id);
 
-        $ad->platforms()->where('ad_id', $id)->get()->each(function($platform) use ($ad) {
-            $platformHelper = $this->getHelperClassFromPlatform($platform);
-            $platformHelper->unpublish($ad, $platform);
-        });
+        $publishedAds = $ad->platforms()->where('ad_id', $id)->get();
+
+        if ($publishedAds) {
+            try {
+                $publishedAds->each(function ($platform) use ($ad) {
+                    $platformHelper = $this->getHelperClassFromPlatform($platform);
+                    $platformHelper->unpublish($ad, $platform);
+                    $ad->platforms()->detach($platform->id);
+                });
+            } catch (\Exception $e) {
+                $request->session()->flash('danger', $e->getMessage());
+                return redirect()->route('ads.list');
+            }
+        }
 
         $ad->delete();
+        $request->session()->flash('success', 'Annonce supprimée');
         return redirect()->route('ads.list');
     }
 
