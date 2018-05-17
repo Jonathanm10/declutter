@@ -20,7 +20,7 @@ Route::group(['prefix' => 'ads', 'as' => 'ads.'], function () {
     Route::get('create', 'AdController@create')->name('create');
     Route::post('store', 'AdController@store')->name('store');
     Route::get('{id}', 'AdController@edit')->name('edit');
-    Route::patch('{id}/edit', 'AdController@update')->name('update');
+    Route::patch('{id}/update', 'AdController@update')->name('update');
     Route::get('{id}/delete', 'AdController@delete')->name('delete');
     Route::get('{id}/toggle-publish/{platform_id}', 'AdController@togglePublish')->name('toggle_publish');
 });
@@ -28,6 +28,6 @@ Route::group(['prefix' => 'ads', 'as' => 'ads.'], function () {
 Route::group(['prefix' => 'platforms', 'as' => 'platforms.'], function () {
     Route::get('/', 'PlatformController@index')->name('list');
     Route::get('{id}', 'PlatformController@edit')->name('edit');
-    Route::patch('{id}/edit', 'PlatformController@update')->name('update');
+    Route::patch('{id}/update', 'PlatformController@update')->name('update');
     Route::get('{id}/remove-configuration', 'PlatformController@removeConfiguration')->name('remove_config');
 });
