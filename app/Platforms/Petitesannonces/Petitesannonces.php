@@ -7,7 +7,7 @@ use App\Ad;
 use App\Platform;
 use App\Platforms\PlatformInterface;
 use App\Platforms\Traits\ImageHelper;
-use App\Platforms\Traits\GetValidationRules;
+use App\Platforms\Traits\GetFormValidationRules;
 use Goutte;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +17,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class Petitesannonces implements PlatformInterface
 {
-    use GetValidationRules;
+    use GetFormValidationRules;
     use ImageHelper;
 
     const MAX_IMAGE_UPLOAD_SIZE = 8388608;

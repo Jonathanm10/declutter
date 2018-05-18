@@ -3,7 +3,7 @@
 namespace App\Platforms\Traits;
 
 
-trait GetValidationRules
+trait GetFormValidationRules
 {
     public function getFormFieldsValidationRules()
     {

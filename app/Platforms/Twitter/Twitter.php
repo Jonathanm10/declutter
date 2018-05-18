@@ -5,13 +5,13 @@ namespace App\Platforms\Twitter;
 use App\Ad;
 use App\Platform;
 use App\Platforms\Traits\ImageHelper;
-use App\Platforms\Traits\GetValidationRules;
+use App\Platforms\Traits\GetFormValidationRules;
 use App\Platforms\PlatformInterface;
 use Illuminate\Support\Facades\Storage;
 
 class Twitter implements PlatformInterface
 {
-    use GetValidationRules;
+    use GetFormValidationRules;
     use ImageHelper;
 
     /**
