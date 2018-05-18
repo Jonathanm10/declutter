@@ -34,8 +34,6 @@
     </div>
 </div>
 
-@include('structures.footer')
-
 {{-- Render any scripts pushed by the templates --}}
 @stack('scripts')
 </body>
