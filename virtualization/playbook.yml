@@ -51,6 +51,9 @@
     - name: Install Laravel packages via composer
       shell: cd {{ root_directory }}../ && composer --quiet install
 
+    - name: Install npm packages
+      shell: cd {{ root_directory }}../ && npm install
+
     - name: Ensure chromedriver is installed
       apt: pkg=chromedriver state=present
       sudo: yes
