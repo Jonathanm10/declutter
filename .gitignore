@@ -1,7 +1,6 @@
 /.vagrant/
 /vendor
 /.idea
-/storage
 .env
 /bootstrap/cache
 /node_modules

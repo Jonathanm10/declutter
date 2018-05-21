@@ -34,6 +34,9 @@
         - php7.2-xml
       notify: restart apache
 
+    - name: Copy the env file
+      shell: cp -n {{ root_directory }}../.env.example {{ root_directory }}../.env
+
     - name: Fix cache permission
       file:
         path: "{{ root_directory }}../bootstrap/cache"
@@ -60,9 +63,6 @@
 
     - name: Set artisan command executable
       file: dest={{ root_directory }}../artisan mode=a+wrx
-
-    - name: Copy the env file
-      shell: cp -n {{ root_directory }}../.env.example {{ root_directory }}../.env
 
     - name: Create Laravel application key
       shell: "{{ root_directory }}../artisan key:generate"
