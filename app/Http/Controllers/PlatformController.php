@@ -47,7 +47,7 @@ class PlatformController extends Controller
             $validatedData['password'] = Crypt::encrypt($validatedData['password']);
         }
 
-        $updatedConfig = array_merge($platform->config, $validatedData);
+        $updatedConfig = array_merge(/** @scrutinizer ignore-type */  $platform->config, $validatedData);
         $platform->config = $updatedConfig;
         $platform->save();
 
