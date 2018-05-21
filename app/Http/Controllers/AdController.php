@@ -31,12 +31,12 @@ class AdController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Ad $ad
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Ad $ad)
     {
-        return view('pages.ads.edit', ['ad' => Ad::findOrFail($id)]);
+        return view('pages.ads.edit', compact('ad'));
     }
 
     /**
@@ -52,11 +52,11 @@ class AdController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Ad $ad)
     {
         $validatedData = $request->validate($this->formRules);
 
-        Ad::whereId($id)->update($validatedData);
+        $ad->update($validatedData);
 
         return redirect()->route('ads.list');
     }
@@ -76,18 +76,17 @@ class AdController extends Controller
 
     /**
      * @param Request $request
-     * @param $id
+     * @param Ad $ad
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function delete(Request $request, $id)
+    public function delete(Request $request, Ad $ad)
     {
-        $ad = Ad::find($id);
+        $publishedPlatforms = $ad->platforms;
 
-        $publishedAds = $ad->platforms()->where('ad_id', $id)->get();
-
-        if ($publishedAds) {
+        if ($publishedPlatforms) {
             try {
-                $publishedAds->each(function ($platform) use ($ad) {
+                $publishedPlatforms->each(function ($platform) use ($ad) {
                     $platformHelper = $this->getHelperClassFromPlatform($platform);
                     $platformHelper->unpublish($ad, $platform);
                     $ad->platforms()->detach($platform->id);
@@ -105,25 +104,22 @@ class AdController extends Controller
 
     /**
      * @param Request $request
-     * @param $id
-     * @param $platformId
+     * @param Ad $ad
+     * @param Platform $platform
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function togglePublish(Request $request, $id, $platformId)
+    public function togglePublish(Request $request, Ad $ad, Platform $platform)
     {
-        $platform = Platform::find($platformId);
-        $ad = Ad::find($id);
-
         $platformHelper = $this->getHelperClassFromPlatform($platform);
-        $isPublished = $ad->platforms()->where('platform_id', $platformId)->first() !== null;
+        $isPublished = $ad->platforms()->where('platform_id', $platform->id)->first() !== null;
 
         try {
             if ($isPublished) {
                 $platformHelper->unpublish($ad, $platform);
-                $ad->platforms()->detach($platformId);
+                $ad->platforms()->detach($platform->id);
             } else {
                 $publicationItemId = $platformHelper->publish($ad, $platform);
-                $ad->platforms()->attach($platformId, ['publication_item_id' => $publicationItemId]);
+                $ad->platforms()->attach($platform->id, ['publication_item_id' => $publicationItemId]);
             }
             $request->session()->flash('success', 'Annonce mise à jour');
         } catch (\Exception $e) {

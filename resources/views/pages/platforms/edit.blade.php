@@ -19,18 +19,15 @@
         </div>
     @endif
 
-    {!! Form::open(['route'=> ['platforms.update', $platform->id], 'method' => 'patch']) !!}
+    {!! Form::open(['route'=> ['platforms.update', $platform], 'method' => 'patch']) !!}
         @foreach ($formFields as $formField)
             <div class="form-group">
                 {!! Form::label($formField['name'], $formField['label']) !!}
-                @php
-                    $form = "Form::{$formField['type']}";
-                    if ($formField['type'] === 'password') {
-                        echo $form($formField['name'], ['class' => 'form-control']);
-                    } else {
-                        echo $form($formField['name'], $platform->config[$formField['name']], ['class' => 'form-control']);
-                    }
-                @endphp
+                @if ($formField['type'] === 'password')
+                    {!! Form::password($formField['name'], ['class' => 'form-control']) !!}
+                @else
+                    {!! Form::{$formField['type']}($formField['name'], $platform->config[$formField['name']], ['class' => 'form-control']) !!}
+                @endif
             </div>
         @endforeach
         {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}

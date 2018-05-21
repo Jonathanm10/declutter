@@ -9,7 +9,7 @@ class PetitesannoncesTest extends TestCase
 {
     /**
      * @return void
-     * @dataProvider testingValuesProvider
+     * @dataProvider urlProvider
      */
     public function testGetPublicationItemIdFromUrl($url)
     {
@@ -19,7 +19,7 @@ class PetitesannoncesTest extends TestCase
         $this->assertEquals($cid, $extractedCid);
     }
 
-    public function testingValuesProvider()
+    public function urlProvider()
     {
         return [
             ['https://www.petitesannonces.ch/my/annonce/?cid=4376813'],

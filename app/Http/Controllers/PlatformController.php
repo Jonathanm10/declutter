@@ -12,24 +12,34 @@ class PlatformController extends Controller
 {
     use GetHelperClassFromPlatform;
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $platforms = Platform::with('ads')->get();
         return view('pages.platforms.list', compact('platforms'));
     }
 
-    public function edit($id)
+    /**
+     * @param Platform $platform
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(Platform $platform)
     {
-        $platform = Platform::find($id);
         $helper = $this->getHelperClassFromPlatform($platform);
         $formFields = $helper->getFormFields();
 
         return view('pages.platforms.edit', compact('platform', 'formFields'));
     }
 
-    public function update(Request $request, $id)
+    /**
+     * @param Request $request
+     * @param Platform $platform
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, Platform $platform)
     {
-        $platform = Platform::find($id);
         $helper = $this->getHelperClassFromPlatform($platform);
         $validatedData = $request->validate($helper->getFormFieldsValidationRules());
 
@@ -44,10 +54,14 @@ class PlatformController extends Controller
         return redirect()->route('platforms.list');
     }
 
-    public function removeConfiguration(Request $request, $id)
+    /**
+     * @param Request $request
+     * @param Platform $platform
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function removeConfiguration(Request $request, Platform $platform)
     {
-        $platform = Platform::find($id);
-        $adsPublishedOnPlatform = $platform->ads()->where('platform_id', $id)->get();
+        $adsPublishedOnPlatform = $platform->ads;
         $helper = $this->getHelperClassFromPlatform($platform);
 
         try {
