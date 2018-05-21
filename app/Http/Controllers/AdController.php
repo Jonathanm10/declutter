@@ -84,7 +84,7 @@ class AdController extends Controller
     {
         $publishedPlatforms = $ad->platforms;
 
-        if ($publishedPlatforms) {
+        if (count($publishedPlatforms) > 0) {
             try {
                 $publishedPlatforms->each(function ($platform) use ($ad) {
                     $platformHelper = $this->getHelperClassFromPlatform($platform);
