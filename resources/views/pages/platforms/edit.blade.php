@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Editer la configuration de {{ $platform->type }}
+    Éditer la configuration de {{ $platform->type }}
 @endsection
 
 @section('main')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Editer la configuration de {{ $platform->type }}</h1>
+        <h1 class="h2">Éditer la configuration de {{ $platform->type }}</h1>
     </div>
 
     @if ($errors->any())
@@ -30,6 +30,6 @@
                 @endif
             </div>
         @endforeach
-        {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit('Éditer', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 @endsection

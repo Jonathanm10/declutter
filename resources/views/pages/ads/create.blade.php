@@ -10,6 +10,6 @@
     </div>
 
     {!! Form::open(['action' => 'AdController@store']) !!}
-    @include('pages.ads.form', ['submitButtonText' => 'Create'])
+    @include('pages.ads.form', ['submitButtonText' => 'Ajouter'])
     {!! Form::close() !!}
 @endsection

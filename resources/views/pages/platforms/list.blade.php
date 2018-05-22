@@ -27,7 +27,7 @@
                     <td>
                         <a class="platform-remove-conf" href="{{ route('platforms.remove_config', $platform->id) }}"
                            data-has-ads="{{ count($platform->ads) > 0 }}">
-                            Remove configuration
+                            Supprimer la configuration
                         </a>
                     </td>
                 </tr>
