@@ -51,6 +51,8 @@ class PlatformController extends Controller
         $platform->config = $updatedConfig;
         $platform->save();
 
+        $request->session()->flash('success', 'Plateforme mise à jour');
+
         return redirect()->route('platforms.list');
     }
 
