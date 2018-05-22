@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Platforms\Twitter;
+namespace App\Platforms;
 
 use App\Ad;
 use App\Platform;
 use App\Platforms\Traits\ImageHelper;
 use App\Platforms\Traits\GetFormValidationRules;
-use App\Platforms\PlatformInterface;
 use Illuminate\Support\Facades\Storage;
 
 class Twitter implements PlatformInterface
@@ -18,6 +17,37 @@ class Twitter implements PlatformInterface
      * @url https://developer.twitter.com/en/docs/media/upload-media/overview
      */
     const MAX_IMAGE_UPLOAD_SIZE = 5242880;
+
+    const FORM_FIELDS = [
+        [
+            'label' => 'Consumer key',
+            'name' => 'consumer_key',
+            'type' => 'text',
+            'id' => 'consumer_key',
+            'validation' => '',
+        ],
+        [
+            'label' => 'Consumer secret',
+            'name' => 'consumer_secret',
+            'type' => 'text',
+            'id' => 'consumer_secret',
+            'validation' => '',
+        ],
+        [
+            'label' => 'Access token',
+            'name' => 'token',
+            'type' => 'text',
+            'id' => 'access_token',
+            'validation' => '',
+        ],
+        [
+            'label' => 'Access token secret',
+            'name' => 'secret',
+            'type' => 'text',
+            'id' => 'access_token_secret',
+            'validation' => '',
+        ],
+    ];
 
     /**
      * @param Platform $platform
@@ -33,8 +63,7 @@ class Twitter implements PlatformInterface
      */
     public function getFormFields(): array
     {
-        $twitterFormFields = new TwitterFormFieldGenerator();
-        return $twitterFormFields->getAll();
+        return self::FORM_FIELDS;
     }
 
     /**

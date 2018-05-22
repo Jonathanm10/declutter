@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Platforms\Petitesannonces;
+namespace App\Platforms;
 
 
 use App\Ad;
 use App\Platform;
-use App\Platforms\PlatformInterface;
 use App\Platforms\Traits\ImageHelper;
 use App\Platforms\Traits\GetFormValidationRules;
 use Goutte;
@@ -28,6 +27,23 @@ class Petitesannonces implements PlatformInterface
     const DELETE_AD_URL = self::AD_URL . '/suppression/?cids[]=';
     const CATEGORY_URL = self::AD_URL . '/insertion/?tid=23&step=form';
 
+    const FORM_FIELDS = [
+        [
+            'label' => 'Email',
+            'name' => 'email',
+            'type' => 'text',
+            'id' => 'email',
+            'validation' => '',
+        ],
+        [
+            'label' => 'Password',
+            'name' => 'password',
+            'type' => 'password',
+            'id' => 'password',
+            'validation' => '',
+        ],
+    ];
+
     /**
      * @param Platform $platform
      */
@@ -49,8 +65,7 @@ class Petitesannonces implements PlatformInterface
      */
     public function getFormFields(): array
     {
-        $petitesannoncesFormField = new PetitesannoncesFormFieldGenerator();
-        return $petitesannoncesFormField->getAll();
+        return self::FORM_FIELDS;
     }
 
     /**

@@ -11,7 +11,7 @@ trait GetHelperClassFromPlatform
     protected function getHelperClassFromPlatform(Platform $platform) : PlatformInterface
     {
         $platformType = $platform->type;
-        $class = "App\Platforms\\$platformType\\$platformType";
+        $class = "App\Platforms\\$platformType";
 
         return new $class();
     }
