@@ -36,5 +36,6 @@
 
 {{-- Render any scripts pushed by the templates --}}
 @stack('scripts')
+<script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

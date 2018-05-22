@@ -61,22 +61,12 @@
 @push('scripts')
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const adDeleteLinks = document.querySelectorAll('.ad-delete');
-        if (adDeleteLinks) {
-          adDeleteLinks.forEach(function (ad) {
-            ad.addEventListener('click', (e) => {
-              e.preventDefault();
-              if (e.currentTarget.getAttribute('data-is-published') === '1') {
-                if (confirm("Les annonces publiées seront automatiquement dépubliées, êtes-vous sûr ?")) {
-                  window.location = e.currentTarget.href;
-                } else {
-                  return;
-                }
-              }
-              window.location = e.currentTarget.href;
-            });
-          });
-        }
+        const conditionallyAlert = new window.ConditionallyAlert(
+          '.ad-delete',
+          'data-is-published',
+          'Les annonces publiées seront automatiquement dépubliées, êtes-vous sûr ?'
+        );
+        conditionallyAlert.setAlert();
       });
     </script>
 @endpush

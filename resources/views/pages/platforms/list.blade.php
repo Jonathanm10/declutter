@@ -40,22 +40,12 @@
 @push('scripts')
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const platformDeleteLinks = document.querySelectorAll('.platform-remove-conf');
-        if (platformDeleteLinks.length > 0) {
-          platformDeleteLinks.forEach(function (platform) {
-            platform.addEventListener('click', (e) => {
-              e.preventDefault();
-              if (e.currentTarget.getAttribute('data-has-ads') === '1') {
-                if (confirm("La plateforme contient des annonces. Ceci dépubliera toutes celles-ci. Êtes-vous sûr ?")) {
-                  window.location = e.currentTarget.href;
-                } else {
-                  return;
-                }
-              }
-              window.location = e.currentTarget.href;
-            });
-          });
-        }
+        const conditionallyAlert = new window.ConditionallyAlert(
+          '.platform-remove-conf',
+          'data-has-ads',
+          'La plateforme contient des annonces. Ceci dépubliera toutes celles-ci. Êtes-vous sûr ?'
+        );
+        conditionallyAlert.setAlert();
       });
     </script>
 @endpush
