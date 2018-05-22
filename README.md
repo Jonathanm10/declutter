@@ -20,3 +20,7 @@ $ vagrant up
 ```
 
 You can now access the website at [declutter.lo](http://declutter.lo).
+
+### Tests
+To run the tests, you must first set the config values for the [Petites annonces](https://www.petitesannonces.ch) website.
+Then run `$ vendor/bin/phpunit`
