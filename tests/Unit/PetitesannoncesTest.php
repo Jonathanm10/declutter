@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Platforms\Petitesannonces\Petitesannonces;
+use App\Platforms\Petitesannonces;
 use Tests\TestCase;
 
 class PetitesannoncesTest extends TestCase
@@ -26,6 +26,7 @@ class PetitesannoncesTest extends TestCase
             ['https://www.petitesannonces.ch/my/annonce/?param=abc&cid=4376813'],
             ['https://www.petitesannonces.ch/my/annonce/?par=de&dk=2&cid=4376813'],
             ['https://www.petitesannonces.ch/my/annonce/while/testing?cid=4376813'],
+            ['https://www.petitesannonces.ch/my/annonce/while/?cid=4376813&param2=abc'],
         ];
     }
 }

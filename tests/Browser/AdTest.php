@@ -36,7 +36,7 @@ class AdTest extends DuskTestCase
                 ->type('description', 'Testing description')
                 ->type('img_url', 'https://www.testingurl.com')
                 ->type('price', 35.45)
-                ->press('Create')
+                ->press('Ajouter')
                 ->assertSee('Testing title ' . $this->uniqueId);
         });
 
@@ -56,7 +56,7 @@ class AdTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($ad) {
             $browser->visit('/ads/' . $ad->id)
                 ->type('price', 343.34)
-                ->press('Edit')
+                ->press('Éditer')
                 ->assertSee('343.34');
         });
 
@@ -76,7 +76,7 @@ class AdTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($ad) {
             $browser->visit('/ads/' . $ad->id)
                 ->type('price', 'abc')
-                ->press('Edit')
+                ->press('Éditer')
                 ->assertSee('Le champ price doit contenir un nombre');
         });
 

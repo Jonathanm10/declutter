@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Ad;
 use App\Platform;
-use App\Platforms\Petitesannonces\Petitesannonces;
+use App\Platforms\Petitesannonces;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
