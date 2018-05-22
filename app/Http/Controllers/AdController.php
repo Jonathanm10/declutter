@@ -49,7 +49,7 @@ class AdController extends Controller
 
     /**
      * @param Request $request
-     * @param $id
+     * @param Ad $ad
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Ad $ad)
@@ -57,6 +57,8 @@ class AdController extends Controller
         $validatedData = $request->validate($this->formRules);
 
         $ad->update($validatedData);
+
+        $request->session()->flash('success', 'Annonce mise à jour');
 
         return redirect()->route('ads.list');
     }
