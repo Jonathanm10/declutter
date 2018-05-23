@@ -3,6 +3,7 @@ export default class ConditionallyAlert {
     this.linkClass = linkClass;
     this.attribute = attribute;
     this.message = message;
+    this.setAlert();
   }
 
   setAlert() {

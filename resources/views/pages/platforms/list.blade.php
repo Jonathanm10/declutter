@@ -40,12 +40,11 @@
 @push('scripts')
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const conditionallyAlert = new window.ConditionallyAlert(
+        new window.ConditionallyAlert(
           '.platform-remove-conf',
           'data-has-ads',
           'La plateforme contient des annonces. Ceci dépubliera toutes celles-ci. Êtes-vous sûr ?'
         );
-        conditionallyAlert.setAlert();
       });
     </script>
 @endpush

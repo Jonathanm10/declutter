@@ -61,12 +61,11 @@
 @push('scripts')
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const conditionallyAlert = new window.ConditionallyAlert(
+        new window.ConditionallyAlert(
           '.ad-delete',
           'data-is-published',
-          'Les annonces publiées seront automatiquement dépubliées, êtes-vous sûr ?'
+          'Les annonces publiées seront automatiquement dépubliées. Êtes-vous sûr ?'
         );
-        conditionallyAlert.setAlert();
       });
     </script>
 @endpush
