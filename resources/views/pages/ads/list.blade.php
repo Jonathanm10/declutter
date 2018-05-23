@@ -26,6 +26,13 @@
             </tr>
             </thead>
             <tbody>
+            @if (count($ads) < 1)
+                <tr>
+                    <td colspan="4" class="text-center">
+                        Aucune annonce. Cliquez sur <a href="{{ route('ads.create') }}">Ajouter</a> pour en ajouter une.
+                    </td>
+                </tr>
+            @endif
             @foreach($ads as $ad)
                 <tr>
                     <td>
